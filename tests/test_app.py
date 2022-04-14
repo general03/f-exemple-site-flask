@@ -22,13 +22,6 @@ def test_multiple_assert(client):
     response_one = client.get('/')
     response_two = client.get('/other')
     response_three = client.get('/exp')
-    assert (
-        response_one,
-        response_one.status_code == 200,
-
-        response_two,
-        response_two.status_code == 200,
-
-        response_three,
-        ValueError
-    )
+    assert response_one, response_one.status_code == 200 + response_two
+    assert response_two, response_two.status_code == 200
+    assert response_three, ValueError
