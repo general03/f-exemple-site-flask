@@ -1,4 +1,5 @@
 from flask import Flask, request
+import requests
 
 app = Flask(__name__)
 
@@ -16,3 +17,9 @@ def hello_other():
 def exp():
     value = int(request.args.get('value'))
     return f"<p>Exposant 2 de {value} : {pow(value, 2)}</p>"
+
+@app.route("/coincoin")
+def coincoin():
+    response = requests.get('https://random-d.uk/api/random')
+    img = response.json().get('url')
+    return f"<img src='{img}' />"
